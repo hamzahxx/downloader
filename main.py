@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import yt_dlp
 
 def download_video(url):
