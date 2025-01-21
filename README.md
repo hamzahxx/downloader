@@ -9,24 +9,45 @@ This Python script allows you to download videos from YouTube, Instagram, and Pi
 - Simple and user-friendly interface.
 - Provides clear error messages for invalid or unsupported URLs.
 
-## Prerequisites
+## Installation
 
-1. Python 3 installed on your system.
-2. Install the `yt_dlp` library:
+### For MacOS
+
+1. Install Python 3 on your system.
+   ```bash
+   brew install python
+   ```
+2. Create a virtual enviroment:
+   ```bash
+   cd ~
+   mkdir .env
+   python3 -m venv ~/.env/video-downloader
+   ```
+3. Install the `yt_dlp` library:
    ```bash
    pip install yt-dlp
+   ```
+4. Turn the script to an executable
+   ```bash
+   chmod +x downloader.py
+   ```
+5. Move the `downloader.py` to your `/usr/local/bin/`
+   ```bash
+   sudo cp downloader.py /usr/local/bin/video-downloader
+   ```
+6. Add the line below to your `.zshrc` file
+   ```bash
+   alias download='source ~/.env/video-downloader/bin/activate && video-downloader; deactivate'
    ```
 
 ## Usage
 
-1. Clone or download this repository to your local machine.
-2. Navigate to the directory containing the script.
-3. Run the script using Python:
+1. Run the script using Python:
    ```bash
-   python3 downloader.py
+   download
    ```
-4. Enter the URL of the video when prompted.
-5. The video will be downloaded to the current directory with the title of the video as the filename.
+2. Enter the URL of the video when prompted.
+3. The video will be downloaded to the `~/download/` directory with the title of the video as the filename.
 
 ## Code Example
 
