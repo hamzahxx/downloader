@@ -1,20 +1,22 @@
-import yt_dlp
-import os
+#!/usr/bin/env python3
 
-DOWNLOAD_DIR = os.path.join(os.getcwd(), 'downloads')
-os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+import yt_dlp
 
 def download_video(url):
     ydl_opts = {
         'format': 'best',
-        'outtmpl': os.path.join(DOWNLOAD_DIR, '%(title)s.%(ext)s'),
+        'outtmpl': '~/Downloads/%(title)s.%(ext)s',
         'restrictfilenames': True,  # Sanitizes filenames
     }
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=True)
-            return ydl.prepare_filename(info)
-    except yt_dlp.utils.DownloadError as e:
-        raise Exception(f"Download error: {str(e)}")
+            ydl.download([url])
+            print("Downloaded successfully!")
+    except yt_dlp.utils.DownloadError:
+        print("Error: Unable to download the video. Please check the URL.")
     except Exception as e:
-        raise Exception(f"An error occurred: {str(e)}")
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    video_url = input("Enter the video URL: ")
+    download_video(video_url)
